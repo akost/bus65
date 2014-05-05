@@ -2,7 +2,9 @@
 //  OpenShift sample Node application
 var express = require('express');
 var fs      = require('fs');
-
+var http    = require('http');
+var request = require('request');
+var cheerio = require('cheerio');
 
 /**
  *  Define the sample application.

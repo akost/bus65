@@ -200,12 +200,39 @@ line-height: 1.4;
   overflow: auto;
   font-family: Menlo,Monaco,"Liberation Mono",Consolas,monospace !important;
 }
+iframe {
+		float:left;
+		width: 48%;
+		margin-left: 1%;
+		height:300px;
+		border:none;
+		overflow:hidden;
+	}
 
+	.cf:before,
+	.cf:after {
+	    content: " "; /* 1 */
+	    display: table; /* 2 */
+	}
+
+	.cf:after {
+	    clear: both;
+	}
 </style>
 
 </head>
 <body>
 <section class='container'>
+	<div class="cf">
+	 	<iframe src="/1_19320" scrolling="no"></iframe>
+	 	 <iframe src="/1_13670" scrolling="no"></iframe>
+	 	</div>
+	  
+	<hr>
+	<iframe src="/1_26715" scrolling="no"></iframe>
+
+
+
           <hgroup>
             <h1>Welcome to your Node.js application on OpenShift</h1>
           </hgroup>
