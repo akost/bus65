@@ -2,7 +2,7 @@
 //  OpenShift sample Node application
 var express = require('express');
 var fs      = require('fs');
-var http    = require('http');
+// var http    = require('http');
 var request = require('request');
 var cheerio = require('cheerio');
 
@@ -26,6 +26,7 @@ var SampleApp = function() {
         //  Set the environment variables we need.
         self.ipaddress = process.env.OPENSHIFT_NODEJS_IP;
         self.port      = process.env.OPENSHIFT_NODEJS_PORT || 9000;
+        self.data = '';
 
         if (typeof self.ipaddress === "undefined") {
             //  Log errors on OpenShift but continue w/ 127.0.0.1 - this
@@ -110,45 +111,43 @@ var SampleApp = function() {
         self.routes['/stops/*'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
             stop_id = req.url.replace("/stops/","");
-            var url = 'http://pugetsound.onebusaway.org/where/standard/stop.action?id=' + stop_id;
+            self.parseBus(stop_id, res);
+            // res.send(self.data);
+            //console.log(self.data);
+        };
 
-                if (stop_id.match(/(\d+)_(\d+)/)) {
-                    console.log(url);
-
-                  request(url, function (error, response, body) {
-                      if (!error && response.statusCode == 200) {
-                        $ = cheerio.load(body);
-                        $("head").prepend('<base href="http://pugetsound.onebusaway.org/">');
-                        $("link[rel=icon]").remove();
-                        $("#container").css({"width":"auto"});
-                        $("script, img, #header, #feedback, .agencyDisclaimers, .stop_links, .agenciesSection").remove();
-                       res.send($.html());
-                   }
-               })
+        self.routes['/multistops/*'] = function(req, res) {
+            res.setHeader('Content-Type', 'text/html');
+            stops = req.url.replace("/multistops/","").split(",");
+            console.log(stops);
+            //self.parseBus(stop_id, res);
+            for (i in stops) {
+                console.log(stops[i]);
+                self.parseBus(stops[i], self.data);
             }
-        }
+            res.send(self.data);    
 
-    };
+        };
+    }
 
-    self.parseBus = function(stop_id) {
+   // data = '';
+    self.parseBus = function(stop_id, res) {
         var url = 'http://pugetsound.onebusaway.org/where/standard/stop.action?id=' + stop_id;
 
-            if (stop_id.match(/(\d+)_(\d+)/)) {
-                console.log(url);
+        if (stop_id.match(/(\d+)_(\d+)/)) {
+            console.log(url);
 
-              request(url, function (error, response, body) {
-                  if (!error && response.statusCode == 200) {
+            request(url, function (error, response, body) {
+                if (!error && response.statusCode == 200) {
                     $ = cheerio.load(body);
                     $("head").prepend('<base href="http://pugetsound.onebusaway.org/">');
                     $("link[rel=icon]").remove();
                     $("#container").css({"width":"auto"});
-                    $("#header").remove();
-                    $("#feedback").remove();
-                    $("script").remove();
-                    $("img").remove();
-                   res.send($.html());
+                    $("script, img, #header, #feedback, .agencyDisclaimers, .stop_links, .agenciesSection").remove();
+                    res.send($.html());
+                    // self.data += $.html();
                }
-           })
+           });
         }
     }
 
