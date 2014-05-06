@@ -25,7 +25,7 @@ var SampleApp = function() {
     self.setupVariables = function() {
         //  Set the environment variables we need.
         self.ipaddress = process.env.OPENSHIFT_NODEJS_IP;
-        self.port      = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+        self.port      = process.env.OPENSHIFT_NODEJS_PORT || 9000;
 
         if (typeof self.ipaddress === "undefined") {
             //  Log errors on OpenShift but continue w/ 127.0.0.1 - this
@@ -106,8 +106,54 @@ var SampleApp = function() {
             res.setHeader('Content-Type', 'text/html');
             res.send(self.cache_get('index.html') );
         };
+
+        self.routes['/stops/*'] = function(req, res) {
+            res.setHeader('Content-Type', 'text/html');
+            stop_id = req.url.replace("/stops/","");
+            var url = 'http://pugetsound.onebusaway.org/where/standard/stop.action?id=' + stop_id;
+
+                if (stop_id.match(/(\d+)_(\d+)/)) {
+                    console.log(url);
+
+                  request(url, function (error, response, body) {
+                      if (!error && response.statusCode == 200) {
+                        $ = cheerio.load(body);
+                        $("head").prepend('<base href="http://pugetsound.onebusaway.org/">');
+                        $("link[rel=icon]").remove();
+                        $("#container").css({"width":"auto"});
+                        $("#header, #feedback, .agencyDisclaimers").remove();
+                        // $("#feedback").remove();
+                        $("script").remove();
+                        $("img").remove();
+                       res.send($.html());
+                   }
+               })
+            }
+        }
+
     };
 
+    self.parseBus = function(stop_id) {
+        var url = 'http://pugetsound.onebusaway.org/where/standard/stop.action?id=' + stop_id;
+
+            if (stop_id.match(/(\d+)_(\d+)/)) {
+                console.log(url);
+
+              request(url, function (error, response, body) {
+                  if (!error && response.statusCode == 200) {
+                    $ = cheerio.load(body);
+                    $("head").prepend('<base href="http://pugetsound.onebusaway.org/">');
+                    $("link[rel=icon]").remove();
+                    $("#container").css({"width":"auto"});
+                    $("#header").remove();
+                    $("#feedback").remove();
+                    $("script").remove();
+                    $("img").remove();
+                   res.send($.html());
+               }
+           })
+        }
+    }
 
     /**
      *  Initialize the server (express) and create the routes and register
