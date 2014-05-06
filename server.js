@@ -121,10 +121,7 @@ var SampleApp = function() {
                         $("head").prepend('<base href="http://pugetsound.onebusaway.org/">');
                         $("link[rel=icon]").remove();
                         $("#container").css({"width":"auto"});
-                        $("#header, #feedback, .agencyDisclaimers").remove();
-                        // $("#feedback").remove();
-                        $("script").remove();
-                        $("img").remove();
+                        $("script, img, #header, #feedback, .agencyDisclaimers, .stop_links, .agenciesSection").remove();
                        res.send($.html());
                    }
                })
