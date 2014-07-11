@@ -144,6 +144,7 @@ var SampleApp = function() {
                     $("link[rel=icon]").remove();
                     $("#container").css({"width":"auto"});
                     $("*.panel").css({"width":"auto"});
+                    $("*.arrivalsStopInfo").css({"border":"none"});
                     $(".arrivalsTable").css({"margin":"auto","border":"none"});
                     $("*.arrivalsTable").css({"background-color":"#fff"});
 
