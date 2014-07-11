@@ -143,6 +143,10 @@ var SampleApp = function() {
                     $("head").prepend('<base href="http://pugetsound.onebusaway.org/">');
                     $("link[rel=icon]").remove();
                     $("#container").css({"width":"auto"});
+                    $("*.panel").css({"width":"auto"});
+                    $(".arrivalsTable").css({"margin":"auto","border":"none"});
+                    $("*.arrivalsTable").css({"background-color":"#fff"});
+
                     $("script, img, #header, #feedback, .agencyDisclaimers, .stop_links, .agenciesSection").remove();
                     res.send($.html());
                     // self.data += $.html();
