@@ -42,11 +42,11 @@ var SampleApp = function() {
      */
     self.populateCache = function() {
         if (typeof self.zcache === "undefined") {
-            self.zcache = { 'index.html': '' };
+            self.zcache = { './static/index.html': '' };
         }
 
         //  Local cache for static content.
-        self.zcache['index.html'] = fs.readFileSync('./index.html');
+        self.zcache['index.html'] = fs.readFileSync('./static/index.html');
     };
 
 
@@ -105,7 +105,7 @@ var SampleApp = function() {
 
         self.routes['/'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
-            res.send(self.cache_get('index.html') );
+            res.send(self.cache_get('static/index.html') );
         };
 
         self.routes['/stops/*'] = function(req, res) {
@@ -145,7 +145,7 @@ var SampleApp = function() {
                     $("#container").css({"width":"auto"});
                     $("*.panel").css({"width":"auto"});
                     $("*.arrivalsStopInfo").css({"border":"none"});
-                    $(".arrivalsTable").css({"margin":"auto","border":"none"});
+                    $(".arrivalsTable").css({"width":"100%", "margin":"auto","border":"none"});
                     $("*.arrivalsTable").css({"background-color":"#fff"});
 
                     $("script, img, #header, #feedback, .agencyDisclaimers, .stop_links, .agenciesSection").remove();
@@ -163,6 +163,7 @@ var SampleApp = function() {
     self.initializeServer = function() {
         self.createRoutes();
         self.app = express.createServer();
+        self.app.use(express.static('static'));
 
         //  Add handlers for the app (from the routes).
         for (var r in self.routes) {
