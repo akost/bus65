@@ -142,7 +142,10 @@ var SampleApp = function() {
                     $ = cheerio.load(body);
                     $("head").prepend('<base href="http://pugetsound.onebusaway.org/">');
                     $("link[rel=icon]").remove();
-                    $("body").css({"font-size":"18px"});
+                    $("meta").remove();
+                    $("body").css({"font-size":"20px"});
+                    $("*.arrivalsStopAddress,*.arrivalsStopAddress").css({"font-size":"100%"});
+                    
                     $("#container").css({"width":"auto"});
                     $("*.panel").css({"width":"auto"});
                     $("*.arrivalsStopInfo").css({"border":"none"});
