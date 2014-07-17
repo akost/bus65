@@ -133,23 +133,25 @@ var SampleApp = function() {
    // data = '';
     self.parseBus = function(stop_id, res) {
         var url = 'http://pugetsound.onebusaway.org/where/standard/stop.action?id=' + stop_id;
-
+        var time;
         if (stop_id.match(/(\d+)_(\d+)/)) {
-            console.log(url);
+
+           time = new Date().toISOString().
+              replace(/T/, ' ').      // replace T with a space
+              replace(/\..+/, '')     // delete the dot and everything after
+
+            console.log(time + " " + url);
 
             request(url, function (error, response, body) {
                 if (!error && response.statusCode == 200) {
                     $ = cheerio.load(body);
 
-                   // var base_url = "http://pugetsound.onebusaway.org/";
                     var where_url = "http://pugetsound.onebusaway.org/where/standard/";
-                  //  $("head").prepend('<base href="http://pugetsound.onebusaway.org/">');
                     $("link[rel=stylesheet]").remove();
                     $("head").prepend('<link rel="stylesheet" href="../css/action.css">');
 
                     $("link[rel=icon]").remove();
-                    $("meta").remove();
-                    //$("body").css({"font-size":"20px"});
+                    //$("meta").remove();
 
                     $('a').each(function(i, link) {
                       if(!$(link).attr('href').match('^http')) {
@@ -160,13 +162,12 @@ var SampleApp = function() {
 
                 
 
-                    $("*.arrivalsStopAddress,*.arrivalsStopAddress").css({"font-size":"100%"});
                     
-                    $("#container").css({"width":"auto"});
-                    $("*.panel").css({"width":"auto"});
-                    $("*.arrivalsStopInfo").css({"border":"none"});
-                    $(".arrivalsTable").css({"width":"100%", "margin":"auto","border":"none"});
-                    $("*.arrivalsTable").css({"background-color":"#fff"});
+                    // $("#container").css({"width":"auto"});
+                    // $("*.panel").css({"width":"auto"});
+                    // $("*.arrivalsStopInfo").css({"border":"none"});
+                    // $(".arrivalsTable").css({"width":"100%", "margin":"auto","border":"none"});
+                    // $("*.arrivalsTable").css({"background-color":"#fff"});
 
                     $("script, img, #header, #feedback, .agencyDisclaimers, .stop_links, .agenciesSection").remove();
                     res.send($.html());
@@ -182,7 +183,7 @@ var SampleApp = function() {
      */
     self.initializeServer = function() {
         self.createRoutes();
-        self.app = express.createServer();
+        self.app = express();
         self.app.use(express.static('static'));
 
         //  Add handlers for the app (from the routes).
