@@ -1,6 +1,6 @@
 body {
 	margin: 0;
-	font: normal 20px PT Sans, sans-serif;
+	font: normal 14px PT Sans, sans-serif;
 }
 
 a {
@@ -29,11 +29,10 @@ a {
 
 
 .arrivalsTable {
-	width: 80%;
+	width: 100%;
 	margin: 0;
 	border-collapse: collapse;
 }
-
 
 .arrivalsTable a {
 	color:#000;
@@ -50,12 +49,12 @@ a {
 
 td.arrivalsRouteEntry,
 td.arrivalsStatusEntry {
-	width: 20%;
+	width: 30%;
 	font-size: 200%;
 }
 
 td.arrivalsDescriptionEntry {
-	width: 60%;
+	width: 40%;
 }
 
 .arrivalsTimePanel {
