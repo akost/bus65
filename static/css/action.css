@@ -4,11 +4,11 @@ body {
 }
 
 a {
-	text-decoration: none
+	text-decoration: none;
 }
 
 .panel {
-	border-top: 10px solid rgb(120,170,54)
+	border-top: 5px solid rgb(120,170,54);
 }
 
 .arrivalsStopInfo {
@@ -29,8 +29,8 @@ a {
 
 
 .arrivalsTable {
-	width: 100%;
 	margin: 0;
+	width: 100%;
 	border-collapse: collapse;
 }
 
@@ -39,22 +39,24 @@ a {
 }
 
 .arrivalsTable td {
-	text-align: center;
 	border-top: 1px solid #ccc;
+	text-align: center;
 }
 
 .arrivalsTable .arrivalsHeader td {
 	border: none;
+	font-size: 80%;
 }
 
 td.arrivalsRouteEntry,
 td.arrivalsStatusEntry {
-	width: 30%;
-	font-size: 200%;
+	width: 15%;
+	white-space: nowrap;
+	font-size: 180%;
 }
 
 td.arrivalsDescriptionEntry {
-	width: 40%;
+	width: 70%;
 }
 
 .arrivalsTimePanel {
@@ -62,7 +64,7 @@ td.arrivalsDescriptionEntry {
 }
 
 .arrivalsStatusUpdates {
-	margin-top: 2em;
+	margin-top: 1em;
 	text-align: center;
 	font-size: 80%;
 }
