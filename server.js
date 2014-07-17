@@ -113,7 +113,7 @@ var SampleApp = function() {
             stop_id = req.url.replace("/stops/","");
             self.parseBus(stop_id, res);
             // res.send(self.data);
-            //console.log(self.data);
+            // console.log(req.url);
         };
 
         self.routes['/multistops/*'] = function(req, res) {
@@ -140,10 +140,26 @@ var SampleApp = function() {
             request(url, function (error, response, body) {
                 if (!error && response.statusCode == 200) {
                     $ = cheerio.load(body);
-                    $("head").prepend('<base href="http://pugetsound.onebusaway.org/">');
+
+                   // var base_url = "http://pugetsound.onebusaway.org/";
+                    var where_url = "http://pugetsound.onebusaway.org/where/standard/";
+                  //  $("head").prepend('<base href="http://pugetsound.onebusaway.org/">');
+                    $("link[rel=stylesheet]").remove();
+                    $("head").prepend('<link rel="stylesheet" href="../css/action.css">');
+
                     $("link[rel=icon]").remove();
                     $("meta").remove();
-                    $("body").css({"font-size":"20px"});
+                    //$("body").css({"font-size":"20px"});
+
+                    $('a').each(function(i, link) {
+                      if(!$(link).attr('href').match('^http')) {
+                        newhref = where_url + $(link).attr('href').replace("/where/standard/","");
+                        $(link).attr('href',newhref);
+                      }
+                    })
+
+                
+
                     $("*.arrivalsStopAddress,*.arrivalsStopAddress").css({"font-size":"100%"});
                     
                     $("#container").css({"width":"auto"});

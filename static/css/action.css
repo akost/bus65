@@ -1,0 +1,96 @@
+body {
+	margin: 0;
+	font: normal 20px PT Sans, sans-serif;
+}
+
+a {
+	text-decoration: none
+}
+
+.panel {
+	border-top: 10px solid rgb(120,170,54)
+}
+
+.arrivalsStopInfo {
+	margin: .5em auto;
+	text-align: center;
+	font-size: 120%;
+}
+
+.arrivalsStopNumber {
+	font-size: 60%;
+}
+
+.arrivalsStopAddress a,
+.arrivalsStopNumber a 
+{
+	color: #000;
+}
+
+
+.arrivalsTable {
+	width: 80%;
+	margin: 0;
+	border-collapse: collapse;
+}
+
+
+.arrivalsTable a {
+	color:#000;
+}
+
+.arrivalsTable td {
+	text-align: center;
+	border-top: 1px solid #ccc;
+}
+
+.arrivalsTable .arrivalsHeader td {
+	border: none;
+}
+
+td.arrivalsRouteEntry,
+td.arrivalsStatusEntry {
+	width: 20%;
+	font-size: 200%;
+}
+
+td.arrivalsDescriptionEntry {
+	width: 60%;
+}
+
+.arrivalsTimePanel {
+	font-size: 80%;
+}
+
+.arrivalsStatusUpdates {
+	margin-top: 2em;
+	text-align: center;
+	font-size: 80%;
+}
+
+.arrivalStatusOnTime  {color:green;}
+.arrivalStatusOnTime a{color:green;}
+
+.arrivalStatusNoInfo  {color:black;}
+.arrivalStatusNoInfo a{color:black;}
+
+.arrivalStatusEarly  {color:red;}
+.arrivalStatusEarly a{color:red;}
+
+.arrivalStatusDelayed  {color:blue;}
+.arrivalStatusDelayed a{color:blue;}
+
+.arrivalStatusDepartedOnTime  {color:green;}
+.arrivalStatusDepartedOnTime a{color:green;}
+
+.arrivalStatusDepartedNoInfo  {color:black;}
+.arrivalStatusDepartedNoInfo a{color:black;}
+
+.arrivalStatusDepartedEarly  {color:red;}
+.arrivalStatusDepartedEarly a{color:red;}
+
+.arrivalStatusDepartedDelayed  {color:blue;}
+.arrivalStatusDepartedDelayed a{color:blue;}
+
+.arrivalStatusCancelled  {color:red;}
+.arrivalStatusCancelled a{color:red;}
