@@ -98,11 +98,6 @@ var SampleApp = function() {
     self.createRoutes = function() {
         self.routes = { };
 
-        self.routes['/asciimo'] = function(req, res) {
-            var link = "http://i.imgur.com/kmbjB.png";
-            res.send("<html><body><img src='" + link + "'></body></html>");
-        };
-
         self.routes['/'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
             res.send(self.cache_get('static/index.html') );
@@ -160,18 +155,8 @@ var SampleApp = function() {
                       }
                     })
 
-                
-
-                    
-                    // $("#container").css({"width":"auto"});
-                    // $("*.panel").css({"width":"auto"});
-                    // $("*.arrivalsStopInfo").css({"border":"none"});
-                    // $(".arrivalsTable").css({"width":"100%", "margin":"auto","border":"none"});
-                    // $("*.arrivalsTable").css({"background-color":"#fff"});
-
                     $("script, img, #header, #feedback, .agencyDisclaimers, .stop_links, .agenciesSection").remove();
                     res.send($.html());
-                    // self.data += $.html();
                }
            });
         }
