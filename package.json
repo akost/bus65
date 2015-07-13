@@ -1,7 +1,7 @@
 {
-  "name": "OpenShift-Sample-App",
+  "name": "Bus 65 app",
   "version": "1.0.0",
-  "description": "OpenShift Sample Application",
+  "description": "Timetable for 3 bus stops in Seattle",
   "keywords": [
     "OpenShift",
     "Node.js",
@@ -9,14 +9,14 @@
     "openshift"
   ],
   "author": {
-    "name": "OpenShift",
-    "email": "ramr@example.org",
-    "url": "http://www.openshift.com/"
+    "name": "Andrei Kost",
+    "email": "kost@kost.ru",
+    "url": "http://kost.us/"
   },
-  "homepage": "http://www.openshift.com/",
+  "homepage": "http://bus65-kost.rhcloud.com/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/openshift/origin-server"
+    "url": "https://github.com/akost/bus65"
   },
 
   "engines": {
